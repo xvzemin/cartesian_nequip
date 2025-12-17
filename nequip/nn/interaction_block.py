@@ -4,9 +4,9 @@
 from math import sqrt
 import torch
 
-from e3nn.o3._irreps import Irreps
-from e3nn.o3._linear import Linear
-from e3nn.o3._tensor_product._sub import FullyConnectedTensorProduct
+from cartnn.o3._irreps import Irreps
+from cartnn.o3._linear import Linear
+from cartnn.o3._tensor_product._sub import FullyConnectedTensorProduct
 
 from nequip.data import AtomicDataDict
 

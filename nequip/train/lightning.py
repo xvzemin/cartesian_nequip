@@ -75,7 +75,6 @@ class NequIPLightningModule(lightning.LightningModule):
 
         # === instantiate model ===
         model_object = self._build_model(model)
-
         # === account for multiple models ===
         # contract:
         # - for multiple models, they must be in the form of a `ModuleDict` of `GraphModel`s
@@ -90,6 +89,7 @@ class NequIPLightningModule(lightning.LightningModule):
         if not isinstance(model_object, torch.nn.ModuleDict):
             model_object = torch.nn.ModuleDict({_SOLE_MODEL_KEY: model_object})
         self.model = model_object
+        logger.info(model_object)
         type_names_list = []
         for k, v in self.model.items():
             assert hasattr(v, "is_graph_model")
@@ -290,6 +290,8 @@ class NequIPLightningModule(lightning.LightningModule):
             train_metric_dict = self.train_metrics.compute(
                 prefix=f"train_metric_epoch{self.logging_delimiter}"
             )
+            for key, value in train_metric_dict.items():
+                logger.info(f"{key}: {value.item() * 1000:.4f}")
             self.log_dict(train_metric_dict)
             self.train_metrics.reset()
         # loss
@@ -323,6 +325,8 @@ class NequIPLightningModule(lightning.LightningModule):
             metric_dict = metrics.compute(
                 prefix=f"val{idx}_epoch{self.logging_delimiter}"
             )
+            for key, value in metric_dict.items():
+                logger.info(f"{key}: {value.item() * 1000:.4f}")
             self.log_dict(metric_dict)
             metrics.reset()
 
@@ -351,6 +355,8 @@ class NequIPLightningModule(lightning.LightningModule):
             metric_dict = metrics.compute(
                 prefix=f"test{idx}_epoch{self.logging_delimiter}"
             )
+            for key, value in metric_dict.items():
+                logger.info(f"{key}: {value.item() * 1000:.4f}")
             self.log_dict(metric_dict)
             metrics.reset()
 

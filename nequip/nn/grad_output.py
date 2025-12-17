@@ -2,8 +2,8 @@
 
 import torch
 
-from e3nn.o3._irreps import Irreps
-from e3nn.util.jit import compile_mode
+from cartnn.o3._irreps import Irreps
+from cartnn.util.jit import compile_mode
 
 from nequip.data import AtomicDataDict
 from ._graph_mixin import GraphModuleMixin

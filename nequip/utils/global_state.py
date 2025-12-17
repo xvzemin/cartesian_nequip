@@ -3,7 +3,7 @@ import torch
 
 from lightning.pytorch import seed_everything
 
-import e3nn
+import cartnn
 
 from .global_dtype import _GLOBAL_DTYPE
 from .versions.torch_versions import _TORCH_GE_2_9
@@ -112,7 +112,7 @@ def set_global_state(
 
         # === e3nn optimization flags ===
         # we initialize them all to true
-        e3nn.set_optimization_defaults(
+        cartnn.set_optimization_defaults(
             specialized_code=True,
             optimize_einsums=True,
             jit_script_fx=True,

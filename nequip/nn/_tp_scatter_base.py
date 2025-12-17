@@ -1,7 +1,7 @@
 # This file is a part of the `nequip` package. Please see LICENSE and README at the root for information on using it.
 
 import torch
-from e3nn.o3._tensor_product._tensor_product import TensorProduct
+from cartnn.o3._tensor_product._tensor_product import TensorProduct
 from .utils import scatter
 from .model_modifier_utils import replace_submodules, model_modifier
 

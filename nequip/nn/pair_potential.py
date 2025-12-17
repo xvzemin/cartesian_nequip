@@ -3,7 +3,7 @@ from typing import Union, Optional, List
 
 import torch
 
-from e3nn.util.jit import compile_mode
+from cartnn.util.jit import compile_mode
 
 from nequip.data import AtomicDataDict
 from nequip.data.misc import chemical_symbols_to_atomic_numbers_dict

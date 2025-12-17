@@ -5,7 +5,7 @@ import contextvars
 
 import torch
 
-from e3nn import set_optimization_defaults, get_optimization_defaults
+from cartnn import set_optimization_defaults, get_optimization_defaults
 
 _CONDITIONAL_TORCHSCRIPT_MODE = contextvars.ContextVar(
     "_CONDITIONAL_TORCHSCRIPT_MODE", default=True

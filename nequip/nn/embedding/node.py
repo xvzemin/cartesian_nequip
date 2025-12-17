@@ -2,7 +2,7 @@
 import torch
 import torch.nn.functional
 
-from e3nn.o3._irreps import Irreps
+from cartnn.o3._irreps import Irreps
 
 from nequip.data import AtomicDataDict
 from .._graph_mixin import GraphModuleMixin

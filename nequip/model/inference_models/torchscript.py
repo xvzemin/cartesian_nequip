@@ -1,7 +1,7 @@
 # This file is a part of the `nequip` package. Please see LICENSE and README
 # at the root for information on using it.
 import torch
-from e3nn.util.jit import script
+from cartnn.util.jit import script
 
 from nequip.nn import graph_model
 from nequip.utils.compile import prepare_model_for_compile

@@ -1,9 +1,9 @@
 # This file is a part of the `nequip` package. Please see LICENSE and README at the root for information on using it.
 import torch
 
-from e3nn.o3._irreps import Irreps
-from e3nn.o3._spherical_harmonics import SphericalHarmonics
-from e3nn.util.jit import compile_mode
+from cartnn.o3._irreps import Irreps
+from cartnn.o3._cartesian_harmonics import CartesianHarmonics
+from cartnn.util.jit import compile_mode
 
 from nequip.utils.global_dtype import _GLOBAL_DTYPE
 from nequip.utils.compile import conditional_torchscript_jit
@@ -189,13 +189,13 @@ class BesselEdgeLengthEncoding(GraphModuleMixin, torch.nn.Module):
 
 
 @compile_mode("script")
-class SphericalHarmonicEdgeAttrs(GraphModuleMixin, torch.nn.Module):
+class CartesianHarmonicEdgeAttrs(GraphModuleMixin, torch.nn.Module):
     """Construct edge attrs as spherical harmonic projections of edge vectors.
 
     Parameters follow ``e3nn.o3.spherical_harmonics``.
 
     Args:
-        irreps_edge_sh (int, str, or o3.Irreps): if int, will be treated as lmax for o3.Irreps.spherical_harmonics(lmax)
+        irreps_edge_sh (int, str, or o3.Irreps): if int, will be treated as lmax for o3.Irreps.cartesian_harmonics(lmax)
         edge_sh_normalization (str): the normalization scheme to use
         edge_sh_normalize (bool, default: True): whether to normalize the spherical harmonics
         out_field (str, default: AtomicDataDict.EDGE_ATTRS_KEY: data/irreps field
@@ -222,8 +222,11 @@ class SphericalHarmonicEdgeAttrs(GraphModuleMixin, torch.nn.Module):
             irreps_in=irreps_in,
             irreps_out={out_field: self.irreps_edge_sh},
         )
-        self.sh = SphericalHarmonics(
-            self.irreps_edge_sh, edge_sh_normalize, edge_sh_normalization
+        self.ch = CartesianHarmonics(
+            irreps_out=self.irreps_edge_sh, 
+            normalize=edge_sh_normalize, 
+            norm=True, 
+            traceless=True
         )
         # i.e. `model_dtype`
         self._output_dtype = torch.get_default_dtype()
@@ -231,7 +234,7 @@ class SphericalHarmonicEdgeAttrs(GraphModuleMixin, torch.nn.Module):
     def forward(self, data: AtomicDataDict.Type) -> AtomicDataDict.Type:
         data = with_edge_vectors_(data, with_lengths=False)
         edge_vec = data[AtomicDataDict.EDGE_VECTORS_KEY]
-        edge_sh = self.sh(edge_vec)
+        edge_sh = self.ch(edge_vec)
         data[self.out_field] = edge_sh.to(self._output_dtype)
         return data
 

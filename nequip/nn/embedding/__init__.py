@@ -3,7 +3,7 @@ from .node import NodeTypeEmbed
 from ._edge import (
     EdgeLengthNormalizer,
     BesselEdgeLengthEncoding,
-    SphericalHarmonicEdgeAttrs,
+    CartesianHarmonicEdgeAttrs,
     AddRadialCutoffToData,
 )
 from .cutoffs import PolynomialCutoff
@@ -12,7 +12,7 @@ __all__ = [
     NodeTypeEmbed,
     EdgeLengthNormalizer,
     BesselEdgeLengthEncoding,
-    SphericalHarmonicEdgeAttrs,
+    CartesianHarmonicEdgeAttrs,
     AddRadialCutoffToData,
     PolynomialCutoff,
 ]

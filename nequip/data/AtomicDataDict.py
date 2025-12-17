@@ -31,7 +31,7 @@ Some standard fields:
 from typing import Dict, Union, Tuple, List, Optional, Any
 
 import torch
-from e3nn.o3._irreps import Irreps
+from cartnn.o3._irreps import Irreps
 
 # Make the keys available in this module
 from ._keys import *  # noqa: F403, F401

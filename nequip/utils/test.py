@@ -1,7 +1,7 @@
 # This file is a part of the `nequip` package. Please see LICENSE and README at the root for information on using it.
 import ase
 import torch
-from e3nn import o3
+from cartnn import o3
 from e3nn.util.test import equivariance_error
 
 from nequip.nn import GraphModuleMixin, GraphModel

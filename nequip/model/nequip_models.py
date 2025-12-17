@@ -1,6 +1,6 @@
 # This file is a part of the `nequip` package. Please see LICENSE and README at the root for information on using it.
 import math
-from e3nn import o3
+from cartnn import o3
 
 from nequip.data import AtomicDataDict
 
@@ -19,7 +19,7 @@ from nequip.nn.embedding import (
     PolynomialCutoff,
     EdgeLengthNormalizer,
     BesselEdgeLengthEncoding,
-    SphericalHarmonicEdgeAttrs,
+    CartesianHarmonicEdgeAttrs,
 )
 
 from .utils import model_builder
@@ -73,7 +73,7 @@ def NequIPGNNEnergyModel(
 
     # === spherical harmonics ===
     irreps_edge_sh = repr(
-        o3.Irreps.spherical_harmonics(lmax=l_max, p=-1 if parity else 1)
+        o3.Irreps.cartesian_harmonics(lmax=l_max, p=-1 if parity else 1)
     )
 
     # === convnet ===
@@ -189,7 +189,7 @@ def FullNequIPGNNEnergyModel(
 
     # === encode and embed features ===
     # == edge tensor embedding ==
-    spharm = SphericalHarmonicEdgeAttrs(
+    spharm = CartesianHarmonicEdgeAttrs(
         irreps_edge_sh=irreps_edge_sh,
     )
     # == edge scalar embedding ==

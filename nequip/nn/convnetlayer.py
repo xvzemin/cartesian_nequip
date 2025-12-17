@@ -1,9 +1,9 @@
 # This file is a part of the `nequip` package. Please see LICENSE and README at the root for information on using it.
 import torch
 
-from e3nn.o3._irreps import Irreps
-from e3nn.nn._gate import Gate
-from e3nn.nn._normact import NormActivation
+from cartnn.o3._irreps import Irreps
+from cartnn.nn._gate import Gate
+from cartnn.nn._normact import NormActivation
 
 from nequip.data import AtomicDataDict
 from ._graph_mixin import GraphModuleMixin
